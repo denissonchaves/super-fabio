@@ -78,8 +78,9 @@ body {
 }
 
 .game-name {
-	width: 400px;
-	margin: 80px 0;
+	width: 100%;
+	max-width: 550px;
+	padding: 80px 160px 40px 160px;
 }
 
 .game-name img {
@@ -154,6 +155,7 @@ body {
 	padding-left: 1.5rem;
 	padding-right: 1.5rem;
 	color: #fff;
+	background: var(--secondary-color);
 	font-size: 0.5rem;
 	gap: 2px; /* Chrome */
 }
@@ -220,5 +222,23 @@ body {
 
 	50% {
 		opacity: 0;
+	}
+}
+
+@media (max-width: 1200px) {
+	.game-name {
+		padding: 40px 160px;
+	}
+}
+
+@media (max-width: 560px) {
+	.game-name {
+		padding: 40px 140px;
+	}
+}
+
+@media (max-width: 320px) {
+	.game-name {
+		padding: 40px 100px;
 	}
 }
