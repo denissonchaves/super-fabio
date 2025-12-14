@@ -4,15 +4,125 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Super Fábio</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./css/style.css" />
 		<script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
 	</head>
 
 	<body>
+		<button class="button-audio">
+			<svg
+				class="audio-off"
+				xmlns="http://www.w3.org/2000/svg"
+				height="24px"
+				viewBox="0 -960 960 960"
+				width="24px"
+				fill="#ffffff"
+			>
+				<path
+					d="M792-56 671-177q-25 16-53 27.5T560-131v-82q14-5 27.5-10t25.5-12L480-368v208L280-360H120v-240h128L56-792l56-56 736 736-56 56Zm-8-232-58-58q17-31 25.5-65t8.5-70q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 53-14.5 102T784-288ZM650-422l-90-90v-130q47 22 73.5 66t26.5 96q0 15-2.5 29.5T650-422ZM480-592 376-696l104-104v208Zm-80 238v-94l-72-72H200v80h114l86 86Zm-36-130Z"
+				/>
+			</svg>
+
+			<svg
+				class="audio-on -hidden"
+				xmlns="http://www.w3.org/2000/svg"
+				height="24px"
+				viewBox="0 -960 960 960"
+				width="24px"
+				fill="#ffffff"
+			>
+				<path
+					d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320ZM400-606l-86 86H200v80h114l86 86v-252ZM300-480Z"
+				/>
+			</svg>
+
+			<audio id="background-music" paused loop>
+				<source src="./assets/audios/audio-better-off-alone.webm" type="audio/mpeg" />
+			</audio>
+		</button>
+
+		<main class="main">
+			<section id="game-name" class="game-name">
+				<img src="./assets/img/logo-game.png" alt="">
+			</section>
+
+			<section id="game-over-name" class="game-over-name -hidden">
+				<span>Game Over</span>
+			</section>
+
+			<section id="main-menu" class="menu">
+				<span class="arrow"></span>
+				<button class="menu-item" onclick="startGame()">Start game</button>
+				<button class="menu-item" onclick="openDialog('#instructions-overlay')">
+					Instructions
+				</button>
+				<button class="menu-item" onclick="openDialog('#controls-overlay')">
+					Controls
+				</button>
+				<!-- <button class="menu-item" onclick="openDialog('#options-overlay')">Options</button> -->
+			</section>
+
+			<section id="game-over-menu" class="menu -hidden">
+				<button class="menu-item" onclick="menuChange(this, '#main-menu')">
+					Main Menu
+				</button>
+			</section>
+
+			<div id="instructions-overlay" class="dialog-overlay -hidden">
+				<div class="dialog-box">
+					<p class="dialog-text">
+						Reuna todas as áreas da empresa para derrotar o temido Churn.
+					</p>
+					<div class="dialog-buttons">
+						<button onclick="closeDialog(this)">Close</button>
+					</div>
+				</div>
+			</div>
+
+			<div id="controls-overlay" class="dialog-overlay -hidden">
+				<div class="dialog-box">
+					<img src="./assets/sprites/arrows.png" alt="arrows or wasd" />
+					<p class="dialog-text">Move</p>
+					<img src="./assets/sprites/space.png" alt="space or enter" />
+					<p class="dialog-text">Fireball</p>
+					<div class="dialog-buttons">
+						<button onclick="closeDialog(this)">Close</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- <div id="options-overlay" class="dialog-overlay -hidden">
+				<div class="dialog-box">
+					<p class="dialog-text">Music 1</p>
+					<p class="dialog-text">Music 2</p>
+					<div class="dialog-buttons">
+						<button onclick="closeDialog(this)">Close</button>
+					</div>
+				</div>
+			</div> -->
+		</main>
+
+		<footer class="footer">
+			<p><b>© 2025 Super Fábio</b>.</p>
+			<p>
+				Todos os direitos alguma coisa blá blá. Desenvolvido por <b>sei lá</b>. Imagens e
+				marcas registradas são propriedade de seus respectivos donos (uhum, sei).
+			</p>
+			<p>
+				Para mais informações, que ninguém lê mesmo, consulte nossos Termos de Uso e
+				Política de Privacidade.
+			</p>
+		</footer>
+
 		<div id="game-container"></div>
-		<script src="./js/menu-scene.js"></script>
-		<script src="./js/game-scene.js"></script>
-		<script src="./js/instructions-scene.js"></script>
-		<script src="./js/credits-scene.js"></script>
-		<script src="./js/main.js"></script>
+		<script src="./js/config.js"></script>
+		<script src="./js/menu.js"></script>
 	</body>
 </html>

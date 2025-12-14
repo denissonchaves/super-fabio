@@ -1,0 +1,244 @@
+@font-face {
+	font-family: 'Bungee'; /* Nome para a fonte */
+	src: url('../assets/fonts/Bungee-Regular.TTF') format('truetype'); /* Caminho do arquivo TTF */
+}
+
+@font-face {
+	font-family: 'Jersey25'; /* Nome para a fonte */
+	src: url('../assets/fonts/Jersey25-Regular.TTF') format('truetype'); /* Caminho do arquivo TTF */
+}
+
+:root {
+	--primary-color: #308333;
+	--secondary-color: #053930;
+}
+
+*,
+*:after,
+*:before {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+	font-size: 100%;
+	font-family: 'Press Start 2P', serif;
+	font-weight: 400;
+	font-style: normal;
+	text-transform: uppercase;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	height: 100vh;
+	font-family: 'Press Start 2P', system-ui;
+	font-weight: 400;
+	font-style: normal;
+	color: #fff;
+	background: #000;
+}
+
+.main {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	/* background: url('../assets/img/background-menu.jpg') no-repeat center; */
+	background: var(--secondary-color);
+	background-size: cover;
+}
+
+.button-audio {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 40px;
+	height: 40px;
+	background: transparent;
+	border: none;
+	color: #fff;
+	cursor: pointer;
+}
+
+.audio-on.-hidden,
+.audio-off.-hidden {
+	display: none;
+}
+
+.game-canvas {
+	display: block;
+}
+
+.color-primary {
+	color: var(--primary-color);
+}
+
+.color-secondary {
+	color: var(--secondary-color);
+}
+
+.game-name {
+	width: 400px;
+	margin: 80px 0;
+}
+
+.game-name img {
+	width: 100%;
+	height: auto;
+}
+
+.game-over-name {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 40px;
+	color: var(--primary-color);
+	font-size: 4rem;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#main-menu,
+#fase-menu,
+#game-over-menu {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+}
+
+#main-menu.-hidden,
+#fase-menu.-hidden,
+#game-over-menu.-hidden {
+	display: none;
+}
+
+.menu-item {
+	padding: 10px 20px;
+	background: none;
+	border: none;
+	font-family: inherit;
+	font-size: inherit;
+	color: #fff;
+	cursor: pointer;
+	position: relative;
+	line-height: 24px; /* Ajuste a altura da linha se necessário */
+}
+
+.menu-item::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: -30px;
+	width: 40px;
+	height: 40px;
+	background: url('../assets/img/indicador-menu.png') no-repeat center;
+	background-size: contain;
+	visibility: hidden;
+	animation: blink 0.5s infinite;
+	transform: translateY(-50%);
+}
+
+.menu-item.selected::before {
+	visibility: visible;
+}
+
+#fase-menu .menu-item:disabled {
+	color: #666;
+}
+
+#fase-menu .menu-item:disabled::after {
+	content: '';
+	position: absolute;
+	top: 45%;
+	right: -20px;
+	width: 40px;
+	height: 40px;
+	/* background: url('../assets/sprites/lock.png') no-repeat center; */
+	background-size: contain;
+	transform: translateY(-50%);
+}
+
+.footer {
+	position: absolute;
+	bottom: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	color: #fff;
+	font-size: 0.5rem;
+	gap: 2px; /* Chrome */
+}
+
+.dialog-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.dialog-box {
+	background: black;
+	border: 2px solid var(--primary-color);
+	padding: 20px;
+	color: #fff;
+	font-family: 'Press Start 2P', sans-serif;
+}
+
+.dialog-buttons {
+	margin-top: 20px;
+}
+
+.dialog-buttons button {
+	background: var(--primary-color);
+	border: none;
+	padding: 10px 20px;
+	margin: 0 10px;
+	font-family: inherit;
+	cursor: pointer;
+	color: #000;
+}
+
+.dialog-buttons button:hover {
+    color: #fff;
+	background: var(--secondary-color);
+}
+
+#controls-overlay .dialog-text {
+	margin: 10px 0 40px 0;
+}
+
+.header.-hidden,
+.main.-hidden,
+.footer.-hidden,
+.game-name.-hidden,
+.menu.-hidden,
+.game-over-name.-hidden,
+.game-over-menu.-hidden,
+.dialog-overlay.-hidden,
+.fase-one.-hidden,
+.fase-two.-hidden,
+.fase-three.-hidden {
+	display: none;
+}
+
+@keyframes blink {
+	0%,
+	100% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0;
+	}
+}
