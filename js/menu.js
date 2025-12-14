@@ -98,12 +98,14 @@ buttonAudio.addEventListener('click', function () {
 	}
 });
 
+let game;
+
 function startGame() {
-	if (window.game) {
-		window.game.destroy(true);
+	if (game) {
+		game.destroy(true);
 	}
-	window.game = new Phaser.Game(config);
+	game = new Phaser.Game(config);
 	main.classList.add('-hidden');
-    footer.classList.add('-hidden');
-    gameContainer.classList.remove('-hidden');
+	footer.classList.add('-hidden');
+	gameContainer.classList.remove('-hidden');
 }

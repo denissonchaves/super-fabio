@@ -6,4 +6,11 @@ var config = {
 	backgroundColor: '#222',
 	parent: 'game-container',
 	scene: [Scene01],
+	physics: {
+		default: 'arcade',
+		arcade: {
+			gravity: { y: 1000 },
+		},
+		pixelArt: true
+	}
 };
