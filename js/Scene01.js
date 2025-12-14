@@ -126,7 +126,7 @@ class Scene01 extends Phaser.Scene {
 		this.bricks.create(1584, 564, 'brick').refreshBody();
 		this.bricks.create(1584, 596, 'brick').refreshBody();
 		
-		this.doors.create(1584, 40, 'door').refreshBody();
+		this.doors.create(1584, 72, 'door').refreshBody();
 
 		/* PLATAFORMAS */
 		this.platformsLarge.create(250, 150, 'platformSmall').refreshBody();
