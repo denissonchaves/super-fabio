@@ -26,6 +26,8 @@ class Scene01 extends Phaser.Scene {
 		this.load.image('iopa', 'assets/sprites/iopa.png');
 		this.load.image('sdr', 'assets/sprites/sdr.png');
 
+		this.load.image('shoot', 'assets/sprites/disparo.png');
+
 		this.load.spritesheet('player', 'assets/sprites/player-parado.png', {
 			frameWidth: 105,
 			frameHeight: 198,
@@ -38,6 +40,10 @@ class Scene01 extends Phaser.Scene {
 	}
 
 	create() {
+		// Grupo de tiros
+		this.shoots = this.physics.add.group();
+		// Cooldown para evitar múltiplos tiros por frame
+		this.shootCooldown = 0;
 		// Contador de equipes coletadas
 		this.equipesColetadas = 0;
 		this.totalEquipes = 12;
@@ -186,6 +192,10 @@ class Scene01 extends Phaser.Scene {
 		});
 
 		/* COLISÕES */
+		// Colisão do tiro com blocos
+		this.physics.add.collider(this.shoots, this.bricks, (shoot, brick) => {
+			shoot.destroy();
+		});
 		this.physics.add.collider(this.player, this.grounds);
 		this.physics.add.collider(this.player, this.bricks);
 		this.physics.add.collider(this.player, this.platformsSmall);
@@ -211,6 +221,10 @@ class Scene01 extends Phaser.Scene {
 	}
 
 	update() {
+		// Atualiza cooldown do tiro
+		if (this.shootCooldown > 0) {
+			this.shootCooldown--;
+		}
 		const left = this.control.left.isDown || this.wasd.left.isDown;
 		const right = this.control.right.isDown || this.wasd.right.isDown;
 		const up = this.control.up.isDown || this.wasd.up.isDown;
@@ -248,6 +262,31 @@ class Scene01 extends Phaser.Scene {
 			this.movingPlatform.setVelocityX(-100);
 		} else if (this.movingPlatform.x <= 1000) {
 			this.movingPlatform.setVelocityX(100);
+		}
+
+		// Disparo ao pressionar espaço
+		if (
+			(Phaser.Input.Keyboard.JustDown(this.control.space) ||
+				Phaser.Input.Keyboard.JustDown(this.wasd.space)) &&
+			this.shootCooldown === 0
+		) {
+			this.shootCooldown = 50; // Pequeno cooldown para evitar spam
+			// Posição inicial do tiro (ajustar conforme sprite do player)
+			const offsetX = this.player.flipX ? -40 : 40;
+			const shoot = this.shoots.create(this.player.x + offsetX, this.player.y, 'shoot');
+			shoot.setVelocityX(this.player.flipX ? -500 : 500);
+			shoot.setVelocityY(0);
+			shoot.setGravityY(0);
+			shoot.setCollideWorldBounds(true);
+			shoot.body.onWorldBounds = true;
+			shoot.body.allowGravity = false;
+			shoot.setScale(0.75);
+			// Remove o tiro ao sair da tela
+			shoot.body.world.on('worldbounds', function (body) {
+				if (body.gameObject === shoot) {
+					shoot.destroy();
+				}
+			});
 		}
 	}
 
