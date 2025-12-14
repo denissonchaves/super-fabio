@@ -69,10 +69,6 @@ body {
 	display: none;
 }
 
-.game-canvas {
-	display: block;
-}
-
 .color-primary {
 	color: var(--primary-color);
 }
@@ -101,7 +97,6 @@ body {
 }
 
 #main-menu,
-#fase-menu,
 #game-over-menu {
 	display: flex;
 	flex-direction: column;
@@ -109,8 +104,12 @@ body {
 	position: relative;
 }
 
+#game-container {
+    width: 100%;
+}
+
 #main-menu.-hidden,
-#fase-menu.-hidden,
+#game-container.-hidden,
 #game-over-menu.-hidden {
 	display: none;
 }
@@ -143,22 +142,6 @@ body {
 
 .menu-item.selected::before {
 	visibility: visible;
-}
-
-#fase-menu .menu-item:disabled {
-	color: #666;
-}
-
-#fase-menu .menu-item:disabled::after {
-	content: '';
-	position: absolute;
-	top: 45%;
-	right: -20px;
-	width: 40px;
-	height: 40px;
-	/* background: url('../assets/sprites/lock.png') no-repeat center; */
-	background-size: contain;
-	transform: translateY(-50%);
 }
 
 .footer {
@@ -210,7 +193,7 @@ body {
 }
 
 .dialog-buttons button:hover {
-    color: #fff;
+	color: #fff;
 	background: var(--secondary-color);
 }
 
@@ -225,10 +208,7 @@ body {
 .menu.-hidden,
 .game-over-name.-hidden,
 .game-over-menu.-hidden,
-.dialog-overlay.-hidden,
-.fase-one.-hidden,
-.fase-two.-hidden,
-.fase-three.-hidden {
+.dialog-overlay.-hidden {
 	display: none;
 }
 

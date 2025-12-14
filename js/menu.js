@@ -1,9 +1,9 @@
-const header = document.querySelector('header');
 const main = document.querySelector('main');
 const footer = document.querySelector('footer');
 
 const mainMenu = document.querySelector('#main-menu');
 const gameOverMenu = document.querySelector('#game-over-menu');
+const gameContainer = document.querySelector('#game-container');
 
 const mainMenuItems = document.querySelectorAll('#main-menu .menu-item');
 const gameOverMenuItems = document.querySelectorAll('#game-over-menu .menu-item');
@@ -97,3 +97,13 @@ buttonAudio.addEventListener('click', function () {
 		audio.pause();
 	}
 });
+
+function startGame() {
+	if (window.game) {
+		window.game.destroy(true);
+	}
+	window.game = new Phaser.Game(config);
+	main.classList.add('-hidden');
+    footer.classList.add('-hidden');
+    gameContainer.classList.remove('-hidden');
+}
