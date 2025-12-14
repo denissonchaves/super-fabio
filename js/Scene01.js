@@ -8,6 +8,7 @@ class Scene01 extends Phaser.Scene {
 
 		this.load.image('ground', 'assets/sprites/chao.png');
 		this.load.image('brick', 'assets/sprites/bloco.png');
+		this.load.image('door', 'assets/sprites/porta.png');
 		this.load.image('platformSmall', 'assets/sprites/plataforma-p.png');
 		this.load.image('platformMedium', 'assets/sprites/plataforma-m.png');
 		this.load.image('platformLarge', 'assets/sprites/plataforma-g.png');
@@ -82,6 +83,7 @@ class Scene01 extends Phaser.Scene {
 		/* GRUPOS */
 		this.grounds = this.physics.add.staticGroup();
 		this.bricks = this.physics.add.staticGroup();
+		this.doors = this.physics.add.staticGroup();
 		this.platformsSmall = this.physics.add.staticGroup();
 		this.platformsMedium = this.physics.add.staticGroup();
 		this.platformsLarge = this.physics.add.staticGroup();
@@ -107,6 +109,7 @@ class Scene01 extends Phaser.Scene {
 		this.bricks.create(784, 564, 'brick').refreshBody();
 		this.bricks.create(784, 596, 'brick').refreshBody();
 
+		this.bricks.create(1584, 150, 'brick').refreshBody();
 		this.bricks.create(1584, 182, 'brick').refreshBody();
 		this.bricks.create(1584, 190, 'brick').refreshBody();
 		this.bricks.create(1584, 222, 'brick').refreshBody();
@@ -122,6 +125,8 @@ class Scene01 extends Phaser.Scene {
 		this.bricks.create(1584, 532, 'brick').refreshBody();
 		this.bricks.create(1584, 564, 'brick').refreshBody();
 		this.bricks.create(1584, 596, 'brick').refreshBody();
+		
+		this.doors.create(1584, 40, 'door').refreshBody();
 
 		/* PLATAFORMAS */
 		this.platformsLarge.create(250, 150, 'platformSmall').refreshBody();
@@ -129,6 +134,10 @@ class Scene01 extends Phaser.Scene {
 		this.platformsSmall.create(718, 450, 'platformSmall').refreshBody();
 		this.platformsLarge.create(400, 300, 'platformLarge').refreshBody();
 		this.platformsLarge.create(600, 150, 'platformLarge').refreshBody();
+
+		this.platformsMedium.create(1200, 150, 'platformLarge').refreshBody();
+		this.platformsSmall.create(850, 300, 'platformSmall').refreshBody();
+		this.platformsSmall.create(1518, 300, 'platformSmall').refreshBody();
 
 		/* PLATAFORMA MÓVEL */
 		this.movingPlatform = this.physics.add
@@ -149,7 +158,12 @@ class Scene01 extends Phaser.Scene {
 			{ key: 'marketing', x: 500, y: 250 },
 			{ key: 'comercial', x: 600, y: 100 },
 
-			{ key: 'financeiro', x: 1400, y: 500 },
+			{ key: 'financeiro', x: 1500, y: 100 },
+			{ key: 'cs', x: 850, y: 100 },
+			{ key: 'implantacao', x: 1100, y: 100 },
+			{ key: 'ecossistema', x: 1300, y: 100 },
+			{ key: 'iopa', x: 1500, y: 500 },
+			{ key: 'sdr', x: 900, y: 500 },
 		];
 
 		itemsConfig.forEach(({ key, x, y }) => {
@@ -166,6 +180,7 @@ class Scene01 extends Phaser.Scene {
 		this.physics.add.collider(this.player, this.platformsMedium);
 		this.physics.add.collider(this.player, this.platformsLarge);
 		this.physics.add.collider(this.player, this.movingPlatform);
+		this.physics.add.collider(this.player, this.doors);
 
 		// player x coletáveis
 		this.physics.add.overlap(this.player, this.collectables, this.coletarItem, null, this);
@@ -189,10 +204,12 @@ class Scene01 extends Phaser.Scene {
 		const up = this.control.up.isDown || this.wasd.up.isDown;
 
 		if (left) {
-			this.player.setVelocityX(-200);
+			// this.player.setVelocityX(-200);
+			this.player.setVelocityX(-800);
 			this.player.setFlipX(true);
 		} else if (right) {
-			this.player.setVelocityX(200);
+			// this.player.setVelocityX(200);
+			this.player.setVelocityX(800);
 			this.player.setFlipX(false);
 		} else {
 			this.player.setVelocityX(0);
