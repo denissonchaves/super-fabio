@@ -5,6 +5,7 @@ class Scene01 extends Phaser.Scene {
 
 	preload() {
 		this.load.audio('soundJump', 'assets/audios/audioPulo.wav');
+		this.load.audio('soundCollect', 'assets/audios/audioMoeda.wav');
 
 		this.load.image('background', 'assets/sprites/background-game.png');
 
@@ -49,6 +50,7 @@ class Scene01 extends Phaser.Scene {
 
 	create() {
 		this.soundJump = this.sound.add('soundJump');
+		this.soundCollect = this.sound.add('soundCollect');
 
 		this.nanCount = 0; // Contador de vezes que o HP virou NaN
 		this.shoots = this.physics.add.group();
@@ -351,6 +353,8 @@ class Scene01 extends Phaser.Scene {
 
 	coletarItem(player, item) {
 		item.disableBody(true, true);
+
+		this.soundCollect.play();
 
 		// Atualiza contador de equipes
 		this.equipesColetadas++;
