@@ -448,6 +448,10 @@ class Scene01 extends Phaser.Scene {
 			if (this.nanCount >= 10) {
 				this.monster.anims.stop();
 				this.monster.setFrame(15);
+
+				setTimeout(() => {
+					this.monster.destroy();
+				}, 3000);
 			}
 			// this.gameOver();
 			// return;
