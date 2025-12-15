@@ -276,6 +276,56 @@ class Scene01 extends Phaser.Scene {
 			null,
 			this
 		);
+
+		this.nanMax = 10;
+		this.nanBar = this.add.graphics();
+		this.nanBar.setDepth(200);
+
+		this.nanText = this.add
+			.text(this.monster.x, this.monster.y - this.monster.displayHeight / 2 - 36, '', {
+				fontSize: '14px',
+				fill: '#fff',
+				stroke: '#000',
+				strokeThickness: 3,
+			})
+			.setOrigin(0.5)
+			.setDepth(201);
+
+		this.updateNanBar = () => {
+			const barWidth = 100;
+			const barHeight = 12;
+			const x = this.monster.x - barWidth / 2;
+			const y = this.monster.y - this.monster.displayHeight / 2 - 20;
+			const nanLeft = Math.max(0, this.nanMax - this.nanCount);
+
+			this.nanBar.clear();
+			if (nanLeft > 0 && this.monster && !this.monster.isDead) {
+				this.nanBar.fillStyle(0x990000, 1);
+				this.nanBar.fillRect(x, y, barWidth, barHeight);
+				
+				const valueWidth = (nanLeft / this.nanMax) * barWidth;
+				this.nanBar.fillStyle(0xffffff, 1);
+				this.nanBar.fillRect(x, y, valueWidth, barHeight);
+
+				this.nanText.setText(nanLeft);
+				this.nanText.setPosition(this.monster.x, y - 10);
+				this.nanText.setVisible(true);
+			} else {
+				this.nanBar.clear();
+				this.nanText.setVisible(false);
+			}
+		};
+
+		this.updateNanBar();
+
+		this.events.on('postupdate', () => {
+			if (this.monster && !this.monster.isDead) {
+				this.updateNanBar();
+			} else {
+				this.nanBar.clear();
+				this.nanText.setVisible(false);
+			}
+		});
 	}
 
 	update() {
@@ -392,6 +442,8 @@ class Scene01 extends Phaser.Scene {
 
 		if (isNaN(monster.hp)) {
 			this.nanCount++;
+
+			if (this.updateNanBar) this.updateNanBar();
 
 			if (this.nanCount >= 10) {
 				this.monster.anims.stop();
