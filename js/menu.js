@@ -104,6 +104,15 @@ function startGame() {
 	if (game) {
 		game.destroy(true);
 	}
+
+	if (audio) {
+		audioOn.classList.remove('-hidden');
+		audioOff.classList.add('-hidden');
+		audio.volume = 0.5;
+		audio.loop = true;
+		audio.play();
+	}
+
 	game = new Phaser.Game(config);
 	main.classList.add('-hidden');
 	footer.classList.add('-hidden');

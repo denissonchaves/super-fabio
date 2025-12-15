@@ -228,7 +228,7 @@ class Scene01 extends Phaser.Scene {
 		this.cameras.main.setBounds(0, 0, this.background.width, this.background.height);
 		this.cameras.main.startFollow(this.player);
 
-		this.monster = this.physics.add.sprite(2200, 450, 'monster');
+		this.monster = this.physics.add.sprite(2100, 450, 'monster');
 
 		// this.monster.setCollideWorldBounds(true);
 		this.monster.setImmovable(true);
@@ -369,11 +369,9 @@ class Scene01 extends Phaser.Scene {
 		shoot.hitMonsters.add(monster);
 
 		monster.hp--;
-		console.log('HP do monstro:', monster.hp);
 
 		if (isNaN(monster.hp)) {
 			this.nanCount++;
-			console.log('Contador de NaN:', this.nanCount);
 
 			if (this.nanCount >= 10) {
 				this.gameOver();
@@ -391,7 +389,6 @@ class Scene01 extends Phaser.Scene {
 	}
 
 	gameOver() {
-		console.log('Fim de jogo!');
 		this.physics.world.pause();
 		this.scene.pause();
 		// Aqui você pode exibir tela de Game Over ou reiniciar a cena se quiser
@@ -411,6 +408,5 @@ class Scene01 extends Phaser.Scene {
 		}
 		monster.destroy();
 		this.monster = null;
-		console.log('Monstro destruído!');
 	}
 }
