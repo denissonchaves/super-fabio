@@ -10,6 +10,7 @@ const gameOverMenuItems = document.querySelectorAll('#game-over-menu .menu-item'
 
 const gameName = document.querySelector('.game-name');
 const gameOverName = document.querySelector('.game-over-name');
+const gameWin = document.querySelector('.game-win');
 
 const dialogOverlays = document.querySelectorAll('.dialog-overlay');
 
@@ -99,6 +100,18 @@ buttonAudio.addEventListener('click', function () {
 });
 
 let game;
+
+function showWinGame() {
+	if (game) {
+		game.destroy(true);
+	}
+	gameContainer.classList.add('-hidden');
+	main.classList.add('-hidden');
+	footer.classList.add('-hidden');
+	gameName.classList.add('-hidden');
+	gameOverName.classList.add('-hidden');
+	gameWin.classList.remove('-hidden');
+}
 
 function startGame() {
 	if (game) {

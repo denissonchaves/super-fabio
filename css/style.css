@@ -88,11 +88,12 @@ body {
 	height: auto;
 }
 
-.game-over-name {
+.game-over-name,
+.game-win {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 40px;
-	color: var(--primary-color);
+	color: #fff;
 	font-size: 4rem;
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -209,6 +210,7 @@ body {
 .game-name.-hidden,
 .menu.-hidden,
 .game-over-name.-hidden,
+.game-win.-hidden,
 .game-over-menu.-hidden,
 .dialog-overlay.-hidden {
 	display: none;

@@ -391,7 +391,13 @@ class Scene01 extends Phaser.Scene {
 	gameOver() {
 		this.physics.world.pause();
 		this.scene.pause();
-		// Aqui você pode exibir tela de Game Over ou reiniciar a cena se quiser
+
+		setTimeout(() => {
+			if (typeof showWinGame === 'function') {
+				showWinGame();
+			}
+		}, 500);
+		
 		const style = { fontSize: '48px', fill: '#fff' };
 		this.add.text(
 			this.cameras.main.centerX - 150,
