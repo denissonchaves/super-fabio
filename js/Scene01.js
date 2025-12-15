@@ -7,6 +7,7 @@ class Scene01 extends Phaser.Scene {
 		this.load.audio('soundJump', 'assets/audios/audioPulo.wav');
 		this.load.audio('soundCollect', 'assets/audios/audioMoeda.wav');
 		this.load.audio('soundBell', 'assets/audios/sino.mp3');
+		this.load.audio('soundShoot', 'assets/audios/audioDisparo.mp3');
 
 		this.load.image('background', 'assets/sprites/background-game.png');
 
@@ -53,6 +54,7 @@ class Scene01 extends Phaser.Scene {
 		this.soundJump = this.sound.add('soundJump');
 		this.soundCollect = this.sound.add('soundCollect');
 		this.soundBell = this.sound.add('soundBell');
+		this.soundShoot = this.sound.add('soundShoot');
 
 		this.nanCount = 0; // Contador de vezes que o HP virou NaN
 		this.shoots = this.physics.add.group();
@@ -385,6 +387,8 @@ class Scene01 extends Phaser.Scene {
 
 			const offsetX = this.player.flipX ? -40 : 40;
 			const shoot = this.shoots.create(this.player.x + offsetX, this.player.y, 'shoot');
+
+			this.soundShoot.play();
 
 			shoot.setVelocityX(this.player.flipX ? -500 : 500);
 			shoot.setVelocityY(0);
