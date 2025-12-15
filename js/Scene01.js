@@ -11,6 +11,7 @@ class Scene01 extends Phaser.Scene {
 		this.load.image('ground', 'assets/sprites/chao.png');
 		this.load.image('brick', 'assets/sprites/bloco.png');
 		this.load.image('door', 'assets/sprites/porta.png');
+		this.load.image('bell', 'assets/sprites/sino.png');
 		this.load.image('platformSmall', 'assets/sprites/plataforma-p.png');
 		this.load.image('platformMedium', 'assets/sprites/plataforma-m.png');
 		this.load.image('platformLarge', 'assets/sprites/plataforma-g.png');
@@ -112,6 +113,7 @@ class Scene01 extends Phaser.Scene {
 		this.grounds = this.physics.add.staticGroup();
 		this.bricks = this.physics.add.staticGroup();
 		this.doors = this.physics.add.staticGroup();
+		this.bells = this.physics.add.staticGroup();
 		this.platformsSmall = this.physics.add.staticGroup();
 		this.platformsMedium = this.physics.add.staticGroup();
 		this.platformsLarge = this.physics.add.staticGroup();
@@ -156,6 +158,8 @@ class Scene01 extends Phaser.Scene {
 		this.bricks.create(1584, 596, 'brick').refreshBody();
 
 		this.doors.create(1584, 72, 'door').refreshBody();
+
+		this.bells.create(2300, 400, 'bell').setScale(0.1).refreshBody();
 
 		/* PLATAFORMAS */
 		this.platformsLarge.create(250, 150, 'platformSmall').refreshBody();
@@ -212,6 +216,13 @@ class Scene01 extends Phaser.Scene {
 		this.physics.add.collider(this.player, this.platformsLarge);
 		this.physics.add.collider(this.player, this.movingPlatform);
 		this.physics.add.collider(this.player, this.doors);
+		this.physics.add.collider(this.player, this.bells, () => {
+			if (this.nanCount >= 10) {
+				this.gameOver();
+				return;
+			}
+			return;
+		});
 
 		// player x coletáveis
 		this.physics.add.overlap(this.player, this.collectables, this.coletarItem, null, this);
@@ -371,11 +382,13 @@ class Scene01 extends Phaser.Scene {
 
 		if (isNaN(monster.hp)) {
 			this.nanCount++;
-
+			
 			if (this.nanCount >= 10) {
-				this.gameOver();
-				return;
+				this.monster.anims.stop();
+				this.monster.setFrame(15);
 			}
+			// this.gameOver();
+			// return;
 		}
 
 		if (this.monster.hitFlash) return;
